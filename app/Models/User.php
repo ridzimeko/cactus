@@ -18,7 +18,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'bio',
+        'profile_img',
         'email',
+        'username',
+        'location',
         'password',
     ];
 
@@ -43,5 +47,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function questions() {
+        return $this->hasMany(Question::class)->orderByDesc('updated_at');
+    }
+
+    public function answers() {
+        return $this->hasMany(Answer::class)->orderByDesc('updated_at');
     }
 }
