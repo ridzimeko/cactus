@@ -40,11 +40,11 @@ new #[Layout('layouts.app')] class extends Component {
         </div>
     </div>
 
-    <div x-data="{ type: 'answers' }">
+    <div x-data="{ type: 'questions' }">
         <div class="sticky top-0 mt-12 flex items-center gap-4 border-b border-b-neutral-600 bg-gray-950 text-white">
-            <p x-on:click="type = 'answers'" class="cursor-pointer pb-2">{{ $this->user->questions->count() }}
+            <p x-on:click="type = 'questions'" class="cursor-pointer pb-2">{{ $this->user->questions->count() }}
                 Pertanyaan</p>
-            <p x-on:click="type = 'questions'" class="cursor-pointer pb-2">{{ $this->user->answers->count() }} Jawaban
+            <p x-on:click="type = 'answers'" class="cursor-pointer pb-2">{{ $this->user->answers->count() }} Jawaban
             </p>
         </div>
 

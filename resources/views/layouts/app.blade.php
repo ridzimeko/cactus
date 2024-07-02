@@ -29,7 +29,7 @@
         <livewire:layout.navigation />
 
         <!-- Page Content -->
-        <main {{ $attributes->merge(['class' => 'flex-1 max-w-[800px] min-w-0 py-4 px-6']) }}>
+        <main {{ $attributes->merge(['class' => 'flex-1 min-w-0 py-4 px-6']) }}>
             {{ $slot }}
         </main>
 
