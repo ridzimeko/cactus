@@ -66,7 +66,7 @@
             @endif
 
             @if ($type === 'question')
-                <a href="{{ route('question.view', ['id' => $id]) }}">{{ $repliesCount }}
+                <a href="{{ route('question.view', ['question_id' => $id]) }}">{{ $repliesCount }}
                     jawaban</a>
             @endif
         </div>

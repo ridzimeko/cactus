@@ -20,7 +20,7 @@ new #[Layout('layouts.app')] class extends Component {
 }; ?>
 
 <div>
-    <div class="flex gap-10 pt-2">
+    <div class="flex gap-10 px-6 pt-6">
         <div class="flex-shrink-0">
             <x-user-avatar :avatar="$user['profile_img']" class="!size-40" />
             @if ($user['username'] === Auth::user()->username)
@@ -40,7 +40,7 @@ new #[Layout('layouts.app')] class extends Component {
         </div>
     </div>
 
-    <div x-data="{ type: 'questions' }">
+    <div class="px-6" x-data="{ type: 'questions' }">
         <div class="sticky top-0 mt-12 flex items-center gap-4 border-b border-b-neutral-600 bg-gray-950 text-white">
             <p x-on:click="type = 'questions'" class="cursor-pointer pb-2">{{ $this->user->questions->count() }}
                 Pertanyaan</p>

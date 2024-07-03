@@ -19,7 +19,9 @@ new #[Layout('layouts.app', ['sidebar' => true])] class extends Component {
 }; ?>
 
 <div>
-    <x-text-input wire:model.live.debounce.850ms="query" rounded class="mb-4 w-full" placeholder="Cari" />
+    <div class="m-4">
+        <x-text-input wire:model.live.debounce.450ms="query" rounded class="w-full" placeholder="Cari" />
+    </div>
 
     <div x-data="{
         category: $wire.entangle('category'),

@@ -14,7 +14,7 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('/notification', 'pages.notification')->name('notification');
     Volt::route('/ask', 'pages.ask')->name('ask');
     Volt::route('/search', 'pages.search')->name('search');
-    Volt::route('/question/{id}', 'pages.question-view')->name('question.view');
+    Volt::route('/question/{question_id}', 'pages.question-detail')->name('question.view');
 });
 
 require __DIR__.'/auth.php';

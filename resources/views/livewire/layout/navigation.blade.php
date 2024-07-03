@@ -22,7 +22,7 @@ new class extends Component {
     }
 }; ?>
 
-<nav class="sticky top-0 flex max-h-screen w-[320px] flex-col overflow-y-auto border-r-2 border-gray-800 p-6">
+<nav class="sticky top-0 z-30 flex max-h-screen w-[320px] flex-col overflow-y-auto border-r-2 border-gray-800 p-6">
     <div class="flex-grow">
         <x-cactus-logo />
         <x-nav-link :active="request()->routeIs('home')" icon="heroicon-c-home" :href="route('home')" wire:navigate>Beranda</x-nav-link>
