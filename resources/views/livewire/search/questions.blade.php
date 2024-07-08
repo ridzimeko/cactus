@@ -11,12 +11,12 @@ new class extends Component {
     #[Computed]
     public $results;
 
-    public function hydrate() {
-        dd($this->results);
-    }
-
-    public function mount() {
-        $this->results = Question::with(['user'])->where('text', 'like', "%$this->query%")->orderByDesc('updated_at')->get();
+    public function mount()
+    {
+        $this->results = Question::with(['user'])
+            ->where('text', 'like', "%$this->query%")
+            ->orderByDesc('updated_at')
+            ->get();
     }
 }; ?>
 

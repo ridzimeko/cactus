@@ -2,12 +2,14 @@
 
 use App\Models\User;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Locked;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.app')] class extends Component {
-    #[Computed]
-    public $user;
+new #[Layout('layouts.app')] class extends Component
+{
+    public User $user;
 
+    #[Locked]
     public $username;
 
     public function mount()
@@ -15,7 +17,6 @@ new #[Layout('layouts.app')] class extends Component {
         $this->user = User::with(['questions.answers', 'answers'])
             ->where('username', $this->username)
             ->firstOrFail();
-        // $this->questions = $this->user->questions;
     }
 }; ?>
 
@@ -24,8 +25,8 @@ new #[Layout('layouts.app')] class extends Component {
         <div class="flex-shrink-0">
             <x-user-avatar :avatar="$user['profile_img']" class="!size-40" />
             @if ($user['username'] === Auth::user()->username)
-                <x-secondary-button wire:navigate href="{{ route('profile.edit') }}" class="mx-auto block w-max">Edit
-                    Profil</x-secondary-button>
+            <x-secondary-button wire:navigate href="{{ route('profile.edit') }}" class="mx-auto block w-max">Edit
+                Profil</x-secondary-button>
             @endif
         </div>
 
@@ -48,19 +49,16 @@ new #[Layout('layouts.app')] class extends Component {
             </p>
         </div>
 
-        <div class="mt-6 flex flex-col gap-4">
-            <div x-show="type === 'answers'">
+        <div>
+            <div class="mt-6 flex flex-col gap-4" x-show="type === 'answers'">
                 @foreach ($user->answers as $a)
-                    <x-cactus-post :name="$user['name']" :username="$user['username']" :text="$a['text']" :id="$a['id']"
-                        :date="$a['updated_at']" :avatar="$user['profile_img']" :image="$a['image']" size="small" type="answer" />
+                <livewire:answer-post :answer="$a" />
                 @endforeach
             </div>
 
-            <div x-show="type === 'questions'">
+            <div class="mt-6 flex flex-col gap-4" x-show="type === 'questions'">
                 @foreach ($this->user->questions as $q)
-                    <x-cactus-post :name="$user['name']" :username="$user['username']" :text="$q['text']" :id="$q['id']"
-                        :date="$q['updated_at']" :avatar="$user['profile_img']" :image="$q['image']" :repliesCount="$q->answers->count()" size="small"
-                        type="question" />
+                <livewire:question-post :question="$q" />
                 @endforeach
             </div>
         </div>
