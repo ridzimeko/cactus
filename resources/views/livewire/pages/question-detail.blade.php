@@ -4,6 +4,7 @@ use App\Models\Answer;
 use App\Models\Notification;
 use App\Models\Question;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
@@ -35,6 +36,11 @@ new #[Layout('layouts.app', ['sidebar' => true])] class extends Component
         ),
     ]
     public $answerInput;
+
+    public function rendering(View $view): void
+    {
+        $view->title($this->question->text);
+    }
 
     public function mount()
     {

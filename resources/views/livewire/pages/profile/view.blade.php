@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Volt\Component;
@@ -12,7 +13,12 @@ new #[Layout('layouts.app')] class extends Component
     #[Locked]
     public $username;
 
-    public function mount()
+    public function rendering(View $view): void
+    {
+        $view->title("{$this->user->name} (@{$this->username})");
+    }
+
+    public function mount(): void
     {
         $this->user = User::with(['questions.answers', 'answers'])
             ->where('username', $this->username)

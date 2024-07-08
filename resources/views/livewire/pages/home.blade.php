@@ -2,9 +2,10 @@
 
 use App\Models\Question;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.app', ['sidebar' => true])] class extends Component
+new #[Layout('layouts.app', ['sidebar' => true])] #[Title('Beranda')] class extends Component
 {
     public $questions;
 

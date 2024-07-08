@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @stack('meta')
 
-    <title>{{ $title ?? config('app.name', 'Cactus') }}</title>
+    <title>{{ $title ?? null ? $title . ' | ' . config('app.name') : config('app.name') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

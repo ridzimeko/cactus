@@ -5,11 +5,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Volt\Component;
 use Livewire\WithFileUploads;
 
-new #[Layout('layouts.app')] class extends Component {
+new #[Layout('layouts.app')] #[Title('Buat pertanyaan')] class extends Component {
     use WithFileUploads;
 
     #[Locked]
@@ -30,16 +31,17 @@ new #[Layout('layouts.app')] class extends Component {
         $this->name = Auth::user()->name;
     }
 
-    public function rules() : array {
-        return 
-            [
-                'question' => ['required', 'string', 'max:450'],
-                'question_image' => ['file', 'nullable', Rule::imageFile()->max('1mb')],
-            ];
+    public function rules(): array
+    {
+        return [
+            'question' => ['required', 'string', 'max:450'],
+            'question_image' => ['file', 'nullable', Rule::imageFile()->max('1mb')],
+        ];
     }
 
-    public function messages() : array {
-        return  [
+    public function messages(): array
+    {
+        return [
             'question' => 'Tulis pertanyaan yang ingin kamu tanyakan...',
             'question.max' => 'Maaf kamu hanya bisa menulis pertanyaan maksimal 450 karakter',
             'question_image.max' => 'Ukuran gambar terlalu besar! maks 1 Mb',
@@ -61,7 +63,7 @@ new #[Layout('layouts.app')] class extends Component {
             'image' => $validated['question_image'] ?? null,
         ]);
 
-        return $this->redirectRoute('home', navigate: true );
+        return $this->redirectRoute('home', navigate: true);
     }
 }; ?>
 

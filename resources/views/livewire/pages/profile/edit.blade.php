@@ -3,13 +3,15 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Locked;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Volt\Component;
 use Livewire\WithFileUploads;
 
-new #[Layout('layouts.app')] class extends Component {
+new #[Layout('layouts.app')] #[Title('Edit Profil')] class extends Component
+{
     use WithFileUploads;
 
     #[Validate]
@@ -43,7 +45,6 @@ new #[Layout('layouts.app')] class extends Component {
         $this->username = $this->user()->username;
         $this->location = $this->user()->location;
         $this->bio = $this->user()->bio;
-        $this->profile_img = $this->user()->profile_img;
         $this->email = $this->user()->email;
     }
 
@@ -55,14 +56,14 @@ new #[Layout('layouts.app')] class extends Component {
             'username' => ['required', 'regex:/^\w+$/', 'string', 'max:20', Rule::unique(User::class)->ignore($this->user()->id)],
             'location' => ['nullable', 'string', 'max:255'],
             'bio' => ['nullable', 'string', 'max:255'],
-            'profile_img' => ['nullable', Rule::imageFile()->min('1kb')->max('1mb')],
+            'profile_img' => ['nullable', 'extensions:jpg,png', File::image()->max('1mb')],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'profile_img.between' => 'Maaf, max upload gambar adalah 1mb',
+            'profile_img.max' => 'Maaf, max upload gambar adalah 1mb',
             'profile_img.image' => 'File yang kamu upload bukan gambar!',
             'username' => 'Format username tidak valid. Karakter yang boleh digunakan "huruf, angka dan _"',
             'username.unique' => 'Username ini tidak tersedia',
@@ -75,9 +76,11 @@ new #[Layout('layouts.app')] class extends Component {
     {
         $this->validate();
 
+        // Check uploaded image, if there's no image uploaded use previous image
         if ($this->profile_img) {
             $this->profile_img = '/storage/' . $this->profile_img->store('userImage', 'public');
-            // dd($this->profile_img);
+        } else {
+            $this->profile_img = $this->user()->profile_img;
         }
 
         User::find($this->user()->id)->update([
@@ -92,7 +95,7 @@ new #[Layout('layouts.app')] class extends Component {
     }
 }; ?>
 
-<form wire:submit="update">
+<form wire:submit="update" class="px-8 py-6">
     @csrf
 
     <label for="profile_img">
@@ -138,6 +141,6 @@ new #[Layout('layouts.app')] class extends Component {
     <x-primary-button class="mt-6" rounded>Simpan</x-primary-button>
 
     @script
-        <script></script>
+    <script></script>
     @endscript
 </form>
