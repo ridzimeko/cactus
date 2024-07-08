@@ -24,7 +24,10 @@ new class extends Component {
 
 <nav class="sticky top-0 z-30 flex max-h-screen w-[320px] flex-col overflow-y-auto border-r-2 border-gray-800 p-6">
     <div class="flex-grow">
-        <x-cactus-logo />
+        <x-cactus-logo>
+            <h1 class="my-0 text-xl font-bold">Cactus</h1>
+            <p class="my-0 text-lg font-semibold">Forum Tanya Jawab</p>
+        </x-cactus-logo>
         <x-nav-link :active="request()->routeIs('home')" icon="heroicon-c-home" :href="route('home')" wire:navigate>Beranda</x-nav-link>
         <x-nav-link :active="request()->path() === 'user/' . $username" icon="heroicon-s-user" :href="route('profile.view', [$username])" wire:navigate>Profil</x-nav-link>
         <x-nav-link :active="request()->routeIs('notification')" icon="heroicon-s-bell" :href="route('notification')" wire:navigate>Notifikasi</x-nav-link>

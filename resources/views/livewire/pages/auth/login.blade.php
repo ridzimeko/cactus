@@ -33,8 +33,11 @@ new #[Layout('layouts.guest')] class extends Component {
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     {{-- Cactus Head --}}
-    <x-cactus-logo-welcome />
+    <x-cactus-logo class="mb-4">
+        <h1 class="my-0 text-3xl font-bold">CACTUS</h1>
+    </x-cactus-logo>
 
+    <p class="mb-4 text-lg text-gray-300">Login akun untuk melanjutkan</p>
 
     <form wire:submit="login">
         @csrf
@@ -42,8 +45,8 @@ new #[Layout('layouts.guest')] class extends Component {
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="mt-1 block w-full" type="email" name="email" required
-                autofocus autocomplete="username" />
+            <x-text-input wire:model="form.email" id="email" class="mt-1 block w-full" type="email" name="email"
+                required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
         </div>
 
@@ -63,13 +66,13 @@ new #[Layout('layouts.guest')] class extends Component {
                 <input wire:model="form.remember" id="remember_me" type="checkbox"
                     class="rounde border-gray-700 bg-gray-900 text-green-800 shadow-sm focus:ring-green-800 focus:ring-offset-gray-800"
                     name="remember">
-                <span class="ms-2 text-sm text-gray-400">{{ __('Remember me') }}</span>
+                <span class="ms-2 text-sm text-gray-400">{{ __('Ingat akun saya') }}</span>
             </label>
         </div>
 
         <x-primary-button class="mt-2 w-full">LOGIN</x-primary-button>
 
-        <a class="mt-4 block w-max rounded-md text-sm text-gray-200 hover:underline focus:outline-none"
+        <a class="mt-5 block w-max rounded-md text-sm text-gray-200 hover:underline focus:outline-none"
             href="{{ route('register') }}">
             {{ __('Belum punya akun? Daftar akun') }}
         </a>

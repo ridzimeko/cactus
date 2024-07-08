@@ -1,7 +1,6 @@
-<div class="flex items-center text-white gap-4 mb-8">
+<div {{ $attributes->merge(['class' => 'flex items-center gap-4 text-white mb-6']) }}>
     <img width="42px" height="auto" src="/img/cactus.png" alt="Cactus logo" />
     <div>
-        <h1 class="text-xl font-bold my-0">Cactus</h1>
-        <p class="text-lg font-semibold my-0">Forum Tanya Jawab</p>
+        {{ $slot }}
     </div>
 </div>
