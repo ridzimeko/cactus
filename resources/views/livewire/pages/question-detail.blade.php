@@ -63,7 +63,7 @@ new #[Layout('layouts.app', ['sidebar' => true])] class extends Component
         // Kirim notifikasi jika bukan dari user yang sama
         if ($this->authId != $this->question_from_id) {
             Notification::create([
-                'user_id' => $this->authId,
+                'user_id' => $this->question_from_id,
                 'answer_id' => $answer->id,
                 'created_at' => now(),
             ]);

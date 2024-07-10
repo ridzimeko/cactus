@@ -6,7 +6,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.app')] #[Title('Notifikasi')] class extends Component
+new #[Layout('layouts.app', ['sidebar' => true])] #[Title('Notifikasi')] class extends Component
 {
     public $notifications;
 
@@ -18,7 +18,7 @@ new #[Layout('layouts.app')] #[Title('Notifikasi')] class extends Component
     }
 }; ?>
 
-<div>
+<div class="py-4">
     <div class="flex items-center justify-between border-b border-gray-400 px-6 pb-2 text-white">
         <h2 class="text-xl">Notifikasi</h2>
     </div>
