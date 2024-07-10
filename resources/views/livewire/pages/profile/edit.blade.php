@@ -89,13 +89,14 @@ new #[Layout('layouts.app')] #[Title('Edit Profil')] class extends Component
             'username' => $this->username,
             'location' => $this->location,
             'bio' => $this->bio,
+            'email' => $this->email,
         ]);
 
         return $this->redirectRoute('profile.view', [$this->username]);
     }
 }; ?>
 
-<form wire:submit="update" class="px-8 py-6">
+<form wire:submit="update" class="mx-auto max-w-[820px] py-6">
     @csrf
 
     <label for="profile_img">

@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Locked;
 use Livewire\Volt\Component;
 
-new class extends Component
-{
+new class extends Component {
     #[Locked]
     public $authId;
 
@@ -64,17 +63,18 @@ new class extends Component
 
         <div class="w-full text-white">
             <header class="flex items-center gap-2">
-                <a class="text-lg text-gray-200 hover:underline" href="{{ route('profile.view', $answer->user->username) }}">
+                <a class="text-lg text-gray-200 hover:underline"
+                    href="{{ route('profile.view', $answer->user->username) }}">
                     {{ $answer->user->name }}
                 </a>
                 <span class="text-gray-300">{{ '@' . $answer->user->username }}</span>
                 <span class="text-gray-400">{{ $this->getFormattedTime($answer->updated_at) }}</span>
                 @if ($answer->user_id === $authId)
-                <div class="opacity-0 transition-all group-hover:opacity-100">
-                    <button title="Hapus post" wire:click="delete">
-                        @svg('heroicon-s-trash', ['class' => 'size-5'])
-                    </button>
-                </div>
+                    <div class="opacity-0 transition-all group-hover:opacity-100">
+                        <button title="Hapus post" wire:click="delete">
+                            @svg('heroicon-s-trash', ['class' => 'size-5'])
+                        </button>
+                    </div>
                 @endif
             </header>
             <p class="break-all">{{ $answer->text }}</p>
@@ -85,6 +85,6 @@ new class extends Component
             </a>
         </div>
         @endif --}}
-</div>
-</article>
+        </div>
+    </article>
 </div>
