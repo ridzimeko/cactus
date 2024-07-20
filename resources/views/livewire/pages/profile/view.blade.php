@@ -66,13 +66,13 @@ new #[Layout('layouts.app')] class extends Component {
         <div class="px-6 pb-8 pt-2">
             <div class="mt-6 flex flex-col gap-6" x-show="type === 'answers'">
                 @foreach ($user->answers as $a)
-                    <livewire:answer-post :answer="$a" />
+                    <livewire:post.answer-post :answer="$a" />
                 @endforeach
             </div>
 
             <div class="mt-6 flex flex-col gap-6" x-show="type === 'questions'">
                 @foreach ($this->user->questions as $q)
-                    <livewire:question-post :question="$q" />
+                    <livewire:post.question-post :question="$q" />
                 @endforeach
             </div>
         </div>

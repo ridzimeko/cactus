@@ -10,8 +10,7 @@ use Livewire\Attributes\Validate;
 use Livewire\Volt\Component;
 use Livewire\WithFileUploads;
 
-new #[Layout('layouts.app')] #[Title('Edit Profil')] class extends Component
-{
+new #[Layout('layouts.app')] #[Title('Edit Profil')] class extends Component {
     use WithFileUploads;
 
     #[Validate]
@@ -67,6 +66,7 @@ new #[Layout('layouts.app')] #[Title('Edit Profil')] class extends Component
             'profile_img.image' => 'File yang kamu upload bukan gambar!',
             'username' => 'Format username tidak valid. Karakter yang boleh digunakan "huruf, angka dan _"',
             'username.unique' => 'Username ini tidak tersedia',
+            'username.max' => 'Username melewati batas maksimal 20 karakter!',
             'email' => 'Format penulisan Email tidak valid',
             'required' => 'Input tidak boleh kosong!',
         ];
@@ -142,6 +142,6 @@ new #[Layout('layouts.app')] #[Title('Edit Profil')] class extends Component
     <x-primary-button class="mt-6" rounded>Simpan</x-primary-button>
 
     @script
-    <script></script>
+        <script></script>
     @endscript
 </form>

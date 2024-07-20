@@ -6,8 +6,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.app', ['sidebar' => true])] #[Title('Notifikasi')] class extends Component
-{
+new #[Layout('layouts.app', ['sidebar' => true])] #[Title('Notifikasi')] class extends Component {
     public $notifications;
 
     public function mount()
@@ -24,6 +23,7 @@ new #[Layout('layouts.app', ['sidebar' => true])] #[Title('Notifikasi')] class e
     </div>
 
     @foreach ($notifications as $n)
-    <x-notification-post :name="$n->answer->user->name" :text="$n->answer->text" :username="$n->answer->user->username" :avatar="$n->answer->user->profile_img" :date="$n->answer->updated_at" :questionId="$n->answer->question_id" />
+        <x-notification-post :name="$n->answer->user->name" :text="$n->answer->text" :username="$n->answer->user->username" :avatar="$n->answer->user->profile_img" :date="$n->answer->updated_at"
+            :questionId="$n->answer->question_id" />
     @endforeach
 </div>
