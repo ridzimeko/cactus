@@ -96,7 +96,7 @@ new #[Layout('layouts.app')] #[Title('Edit Profil')] class extends Component {
     }
 }; ?>
 
-<form wire:submit="update" class="mx-auto max-w-[820px] py-6">
+<form wire:submit="update" class="mx-auto w-full max-w-[820px] p-6">
     @csrf
 
     <label for="profile_img">

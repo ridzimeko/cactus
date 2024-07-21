@@ -2,7 +2,8 @@
     $user = Auth::user();
 @endphp
 
-<aside class="sticky top-0 z-30 max-h-screen w-[300px] border-s-2 border-l-gray-800 bg-gray-950">
+<aside
+    {{ $attributes->merge(['class' => 'sticky top-0 z-30 max-h-screen w-[280px] border-s-2 border-l-gray-800 bg-gray-950 hidden lg:block']) }}>
     <div class="m-4 rounded-lg border border-gray-600 p-8 text-center text-white">
         <x-user-avatar :avatar="$user->profile_img" class="mx-auto mb-2" />
 

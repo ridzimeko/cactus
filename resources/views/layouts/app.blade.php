@@ -29,13 +29,15 @@
         <livewire:layout.navigation />
 
         <!-- Page Content -->
-        <main {{ $attributes->merge(['class' => 'flex-1 min-w-0 h-full']) }}>
+        <main {{ $attributes->merge(['class' => 'flex-1 w-full h-full pb-20 sm:pb-0']) }}>
             {{ $slot }}
         </main>
 
         @if ($sidebar)
-            @includeIf('components.sidebar')
+            <x-sidebar />
         @endif
+
+        <livewire:layout.mobile-navigation />
     </div>
 
     @livewireScripts

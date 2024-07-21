@@ -39,18 +39,17 @@
     <div class="w-full">
         {{-- Post header --}}
         <header class="relative flex w-full items-center justify-between text-white">
-            <div class="flex items-center gap-2">
-                <a class="max-w-[200px] overflow-hidden overflow-ellipsis whitespace-nowrap text-lg text-gray-200 hover:underline"
-                    title="{{ $name }}" href="{{ route('profile.view', [$username]) }}">
+            <div class="flex items-center gap-2 overflow-hidden overflow-ellipsis whitespace-nowrap">
+                <a class="whitespace-nowrap font-bold text-white hover:underline" title="{{ $name }}"
+                    href="{{ route('profile.view', [$username]) }}">
                     {{ $name }}
                 </a>
-                <span
-                    class="max-w-[200px] overflow-hidden overflow-ellipsis whitespace-nowrap text-gray-400">{{ '@' . $username }}</span>
+                <span class="hidden whitespace-nowrap text-gray-400 lg:block">{{ '@' . $username }}</span>
             </div>
 
             {{-- Post menu --}}
             <div class="flex items-center gap-2">
-                <p class="text-base text-gray-400">{{ $fullTime }}</p>
+                <p class="text-sm text-gray-400">{{ $fullTime }}</p>
                 @if ($post_menu)
                     <div x-data={showMenu:false}>
                         <div class="cursor-pointer" x-on:click="showMenu=!showMenu" x-on:click.away="showMenu=false">
@@ -67,7 +66,7 @@
 
         {{-- Post content --}}
         <div>
-            <p class="break-all">
+            <p class="break-all text-gray-300">
                 {{ $text }}
             </p>
 

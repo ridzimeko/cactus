@@ -1,20 +1,19 @@
-@props(['active', 'icon', 'type'])
+@props(['active' => false, 'icon', 'type', 'iconSize' => 10])
 
 @php
-    $classes =
-        $active ?? false
-            ? 'flex items-center gap-4 font-medium text-white my-2 py-2 px-6 rounded-full bg-gray-500 hover:bg-gray-500 hover:cursor-pointer'
-            : 'flex items-center gap-4 font-medium text-white my-2 py-2 px-6 rounded-full hover:bg-gray-500 hover:cursor-pointer';
+    // TODO: Fix active indicator
+    $activeClass = $active ? 'bg-gray-500' : '';
+    $classes = "flex items-center gap-4 font-medium text-white rounded-full p-2 hover:bg-gray-500 before:block before:absolute before:p-8 before:text-center before:-z-10 hover:cursor-pointer $activeClass";
 @endphp
 
 @if ($type ?? false === 'submit')
-    <button {{ $attributes->merge(['class' => $classes]) }}>
-        @svg($icon, ['class' => 'size-10'])
-        {{ $slot }}
+    <button {{ $attributes->merge(['class' => "$classes"]) }}>
+        @svg($icon, ['class' => "size-$iconSize"])
+        <span class="hidden lg:block">{{ $slot }}</span>
     </button>
 @else
-    <a {{ $attributes->merge(['class' => $classes]) }}>
-        @svg($icon, ['class' => 'size-10'])
-        {{ $slot }}
+    <a {{ $attributes->merge(['class' => "$classes"]) }}>
+        @svg($icon, ['class' => "size-$iconSize"])
+        <span class="hidden lg:block">{{ $slot }}</span>
     </a>
 @endif
