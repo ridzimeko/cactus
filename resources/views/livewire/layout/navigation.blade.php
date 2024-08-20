@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Actions\Logout;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 
 new class extends Component {
@@ -33,13 +34,13 @@ new class extends Component {
             </div>
         </x-cactus-logo>
         <div class="flex flex-col gap-2">
-            <x-nav-link :active="request()->routeIs('home')" icon="heroicon-c-home" :href="route('home')" wire:navigate>Beranda</x-nav-link>
-            <x-nav-link :active="request()->path() === 'user/' . $username" icon="heroicon-s-user" :href="route('profile.view', [$username])" wire:navigate>Profil</x-nav-link>
-            <x-nav-link :active="request()->routeIs('notification')" icon="heroicon-s-bell" :href="route('notification')" wire:navigate>Notifikasi</x-nav-link>
-            <x-nav-link :active="request()->routeIs('ask')" icon="heroicon-s-chat-bubble-bottom-center-text" :href="route('ask')"
-                wire:navigate>Tanya</x-nav-link>
-            <x-nav-link :active="request()->routeIs('search')" icon="heroicon-o-magnifying-glass" :href="route('search')"
+            <x-nav-link :active="request()->routeIs('home')" icon="heroicon-o-home" active_icon="heroicon-m-home" :href="route('home')" wire:navigate>Beranda</x-nav-link>
+            <x-nav-link :active="request()->routeIs('search')" icon="heroicon-o-magnifying-glass" active_icon="heroicon-m-magnifying-glass" :href="route('search')"
                 wire:navigate>Cari</x-nav-link>
+            <x-nav-link :active="request()->routeIs('ask')" icon="heroicon-o-chat-bubble-bottom-center-text" active_icon="heroicon-s-chat-bubble-bottom-center-text" :href="route('ask')"
+                wire:navigate>Tanya</x-nav-link>
+            <x-nav-link :active="request()->routeIs('notification')" icon="heroicon-o-bell" active_icon="heroicon-s-bell" :href="route('notification')" wire:navigate>Notifikasi</x-nav-link>
+            <x-nav-link :active="request()->path() === 'user/' . $username" icon="heroicon-o-user" active_icon="heroicon-s-user" :href="route('profile.view', [$username])" wire:navigate>Profil</x-nav-link>
         </div>
     </div>
 
