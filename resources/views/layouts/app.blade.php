@@ -46,7 +46,7 @@
         <livewire:layout.mobile-navigation />
 
         {{-- Post Form Modal --}}
-        <template x-if="showPostForm">
+        <template x-if="showPostForm" x-trap.noscroll="showPostForm">
             <div class="fixed left-0 top-0 z-40 h-screen w-full overflow-y-hidden bg-gray-700/60">
                 <div class="mt-8 flex justify-center">
                     <livewire:post-form />

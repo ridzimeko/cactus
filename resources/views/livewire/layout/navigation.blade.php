@@ -7,7 +7,6 @@ use Livewire\Volt\Component;
 new class extends Component {
     public $class;
     public $username;
-    public $showPostForm;
 
     public function mount()
     {

@@ -28,7 +28,7 @@
     }
 @endphp
 
-<article class="flex gap-5">
+<article x-data="{ openLightbox: false }" class="flex gap-5">
     {{-- Post avatar --}}
     <div class="flex-shrink-0">
         <a class="text-base hover:underline" href="{{ route('profile.view', $username) }}">
@@ -72,9 +72,8 @@
 
             @if ($image)
                 <div class="my-2 h-[320px] w-full rounded-sm bg-gray-800">
-                    <a href="{{ $image }}" target="_blank" rel="noopener noreferrer">
-                        <img src="{{ $image }}" class="h-full w-full object-contain">
-                    </a>
+                    <img src="{{ $image }}" class="h-full w-full cursor-pointer object-contain"
+                        @click="openLightbox = true">
                 </div>
             @endif
         </div>
@@ -83,5 +82,11 @@
         <div class="flex items-center gap-2">
             {{ $post_actions }}
         </div>
+
+        @teleport('body')
+            <div x-show="openLightbox" x-trap.noscroll="openLightbox">
+                <livewire:image-lightbox :src="$image" />
+            </div>
+        @endteleport
     </div>
 </article>
