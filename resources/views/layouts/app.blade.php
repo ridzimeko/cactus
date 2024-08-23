@@ -1,5 +1,9 @@
 @props(['sidebar' => null])
 
+@php
+    $showModalForm = false;
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -25,7 +29,7 @@
 </head>
 
 <body class="bg-gray-950 font-sans text-slate-50 antialiased">
-    <div class="flex min-h-screen">
+    <div x-data="{ 'showPostForm': false }" class="flex min-h-screen">
         <livewire:layout.navigation />
 
         <!-- Page Content -->
@@ -33,11 +37,22 @@
             {{ $slot }}
         </main>
 
+        {{-- Widget Sidebar --}}
         @if ($sidebar)
             <x-sidebar />
         @endif
 
+        <x-ask-floating-button class="fixed bottom-20 right-6" />
         <livewire:layout.mobile-navigation />
+
+        {{-- Post Form Modal --}}
+        <template x-if="showPostForm">
+            <div class="fixed left-0 top-0 z-40 h-screen w-full overflow-y-hidden bg-gray-700/60">
+                <div class="mt-8 flex justify-center">
+                    <livewire:post-form />
+                </div>
+            </div>
+        </template>
     </div>
 
     @livewireScripts

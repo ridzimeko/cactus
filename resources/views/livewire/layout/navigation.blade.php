@@ -7,6 +7,7 @@ use Livewire\Volt\Component;
 new class extends Component {
     public $class;
     public $username;
+    public $showPostForm;
 
     public function mount()
     {
@@ -37,14 +38,13 @@ new class extends Component {
             <x-nav-link :active="request()->routeIs('home')" icon="heroicon-o-home" active_icon="heroicon-m-home" :href="route('home')" wire:navigate>Beranda</x-nav-link>
             <x-nav-link :active="request()->routeIs('search')" icon="heroicon-o-magnifying-glass" active_icon="heroicon-m-magnifying-glass" :href="route('search')"
                 wire:navigate>Cari</x-nav-link>
-            <x-nav-link :active="request()->routeIs('ask')" icon="heroicon-o-chat-bubble-bottom-center-text" active_icon="heroicon-s-chat-bubble-bottom-center-text" :href="route('ask')"
-                wire:navigate>Tanya</x-nav-link>
+
             <x-nav-link :active="request()->routeIs('notification')" icon="heroicon-o-bell" active_icon="heroicon-s-bell" :href="route('notification')" wire:navigate>Notifikasi</x-nav-link>
             <x-nav-link :active="request()->path() === 'user/' . $username" icon="heroicon-o-user" active_icon="heroicon-s-user" :href="route('profile.view', [$username])" wire:navigate>Profil</x-nav-link>
+            <x-primary-button x-on:click="showPostForm = true" class="mt-6 flex gap-4 items-center" type="button">
+                @svg('heroicon-o-pencil-square', 'size-8')
+                <span class="hidden lg:block">Tanya</span>
+            </x-primary-button>
         </div>
-    </div>
-
-    <div>
-        <x-nav-link wire:click="logout" class="w-full" icon="heroicon-o-arrow-left-on-rectangle">Logout</x-nav-link>
     </div>
 </nav>

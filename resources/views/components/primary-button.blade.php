@@ -1,11 +1,10 @@
-@props(['rounded' => false])
+@props(['rounded' => true, 'class' => ''])
 
-@php
-    $classes = $rounded
-        ? 'bg-green-800 px-4 py-2 rounded-full text-white'
-        : 'bg-green-800 px-4 py-2 rounded-md text-white';
-@endphp
-
-<button {{ $attributes->merge(['class' => $classes]) }}>
+<button {{ $attributes }} @class([
+    'bg-green-800 px-4 py-2 text-white hover:bg-green-900 disabled:bg-green-950 disabled:cursor-default cursor-pointer',
+    'rounded-md' => !$rounded,
+    'rounded-full' => $rounded,
+    $class,
+])>
     {{ $slot }}
 </button>
