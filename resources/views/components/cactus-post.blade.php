@@ -75,6 +75,12 @@
                     <img src="{{ $image }}" class="h-full w-full cursor-pointer object-contain"
                         @click="openLightbox = true">
                 </div>
+
+                @teleport('body')
+                    <div x-show="openLightbox" x-trap.noscroll="openLightbox">
+                        <livewire:image-lightbox :src="$image" />
+                    </div>
+                @endteleport
             @endif
         </div>
 
@@ -82,11 +88,5 @@
         <div class="flex items-center gap-2">
             {{ $post_actions }}
         </div>
-
-        @teleport('body')
-            <div x-show="openLightbox" x-trap.noscroll="openLightbox">
-                <livewire:image-lightbox :src="$image" />
-            </div>
-        @endteleport
     </div>
 </article>

@@ -6,7 +6,7 @@ new class extends Component {
     public $class;
 }; ?>
 
-<div id="loader" class="{{ $this->class }}">
+<div id="loader" class="flex justify-center">
     <svg class="h-10 w-10 animate-spin text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none"
         viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

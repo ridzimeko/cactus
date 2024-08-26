@@ -27,7 +27,7 @@ new #[Layout('layouts.app', ['sidebar' => true])] #[Title('Beranda')] class exte
         return Question::with(['user'])
             ->withCount(['answers'])
             ->latest()
-            ->paginate(perPage: 10, page: $this->page);
+            ->paginate(perPage: 15, page: $this->page);
     }
 
     public function loadMore()

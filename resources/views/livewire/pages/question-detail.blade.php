@@ -5,6 +5,7 @@ use App\Models\Notification;
 use App\Models\Question;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
@@ -23,8 +24,13 @@ new #[Layout('layouts.app', ['sidebar' => true])] class extends Component {
     #[Locked]
     public $url;
 
+    #[Computed]
+    public $answers;
+
+    #[Computed]
     public Question $question;
 
+    public $page;
     #[
         Validate(
             rule: 'required|string|max:450',
@@ -43,10 +49,24 @@ new #[Layout('layouts.app', ['sidebar' => true])] class extends Component {
 
     public function mount()
     {
-        $this->question = Question::with(['user', 'answers.user'])->findOrFail($this->question_id);
+        $this->question = Question::with('user')->findOrFail($this->question_id);
+        $this->answers = collect()->push(...$this->loadAnswers()->items());
         $this->question_from_id = $this->question->user->id;
         $this->authId = Auth::user()->id;
         $this->url = request()->url();
+        $this->page = 1;
+    }
+
+    #[Computed]
+    protected function loadAnswers()
+    {
+        return $this->question->answers()->with('user')->paginate(15, page: $this->page);
+    }
+
+    public function loadMore()
+    {
+        $this->page += 1;
+        $this->answers->push(...$this->loadAnswers()->items());
     }
 
     public function createAnswer()
@@ -77,8 +97,8 @@ new #[Layout('layouts.app', ['sidebar' => true])] class extends Component {
 
 <div class="flex flex-col">
     <div class="border-b border-b-gray-600 px-6 pb-4 pt-6">
-        <x-cactus-post :name="$question->user->name" :username="$question->user->username" :text="$question->text" :date="$question->updated_at" :avatar="$question->user->profile_img"
-            :image="$question->image">
+        <x-cactus-post :name="$this->question->user->name" :username="$this->question->user->username" :text="$this->question->text" :date="$this->question->updated_at" :avatar="$this->question->user->profile_img"
+            :image="$this->question->image">
         </x-cactus-post>
     </div>
 
@@ -97,8 +117,15 @@ new #[Layout('layouts.app', ['sidebar' => true])] class extends Component {
     </div>
 
     <div class="mt-4 flex flex-col gap-8 px-6 pb-8">
-        @foreach ($question->answers as $answer)
-            <livewire:post.answer-post :answer="$answer" />
+        @foreach ($this->answers as $key => $answer)
+            <livewire:post.answer-post :key="$answer->id" :$answer />
         @endforeach
+        @if ($this->loadAnswers->hasMorePages())
+            <div x-intersect.full="$wire.loadMore()" class="mx-auto">
+                <div wire:loading wire:target="loadMore" class="loading-indicator">
+                    <livewire:placeholder />
+                </div>
+            </div>
+        @endif
     </div>
 </div>
