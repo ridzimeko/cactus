@@ -9,8 +9,6 @@ use Livewire\Volt\Component;
 new #[Layout('layouts.app')] class extends Component {
     public User $user;
 
-    public $type;
-
     #[Locked]
     public $username;
 
@@ -19,12 +17,12 @@ new #[Layout('layouts.app')] class extends Component {
         $view->title("{$this->user->name} (@{$this->username})");
     }
 
-    public function mount(): void
+    public function mount()
     {
-        $this->user = User::with(['questions.answers', 'answers'])
+        $this->user = User::withCount(['answers', 'questions'])
             ->where('username', $this->username)
             ->firstOrFail();
-        $this->type = 'questions';
+        // dd($this->user);
     }
 }; ?>
 
@@ -50,30 +48,25 @@ new #[Layout('layouts.app')] class extends Component {
     </div>
 
     <div x-data="{
-        type: $wire.entangle('type'),
+        type: 'questions',
         active: 'after:content-[\'\'] after:border-b after:border-b-slate-200 after:w-full after:absolute after:left-0 after:-bottom-2 font-bold'
     }">
         <div
             class="relative flex items-center justify-center gap-10 border-b border-b-neutral-600 py-2 text-center text-white">
             <p x-bind:class="type === 'questions' ? active : ''" class="relative cursor-pointer"
-                x-on:click="type = 'questions'">{{ $user->questions->count() }} Pertanyaan</p>
+                x-on:click="type = 'questions'">{{ $user->questions_count }} Pertanyaan</p>
             <p x-bind:class="type === 'answers' ? active : ''" class="relative cursor-pointer"
                 x-on:click="type = 'answers'">
-                {{ $user->answers->count() }} Jawaban
+                {{ $user->answers_count }} Jawaban
             </p>
         </div>
 
-        <div class="px-6 pb-8 pt-2">
-            <div class="mt-6 flex flex-col gap-6" x-show="type === 'answers'">
-                @foreach ($user->answers as $a)
-                    <livewire:post.answer-post :answer="$a" />
-                @endforeach
+        <div class="block w-full px-6 pb-8 pt-2">
+            <div x-show="type === 'questions'">
+                <livewire:profile.questions :user-id="$user->id" lazy />
             </div>
-
-            <div class="mt-6 flex flex-col gap-6" x-show="type === 'questions'">
-                @foreach ($this->user->questions as $q)
-                    <livewire:post.question-post :question="$q" />
-                @endforeach
+            <div x-show="type === 'answers'">
+                <livewire:profile.answers :user-id="$user->id" lazy />
             </div>
         </div>
     </div>
