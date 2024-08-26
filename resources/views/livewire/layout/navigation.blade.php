@@ -55,9 +55,10 @@ new class extends Component {
             class="flex h-14 w-auto cursor-pointer select-none items-center justify-center rounded-full transition lg:hover:bg-gray-800"
             x-bind:class="showAccountMenu ? 'lg:bg-gray-800' : ''">
             <x-user-avatar :avatar="$user->profile_img" size="small" />
-            <div class="ml-3 hidden flex-1 lg:block">
-                <p class="overflow-hidden text-ellipsis text-base">{{ $user->name }}</p>
-                <p class="overflow-hidden text-ellipsis text-base text-gray-500">{{ '@' . $user->username }}</p>
+            <div class="ml-3 hidden max-w-[180px] flex-1 lg:block">
+                <p class="overflow-clip text-ellipsis whitespace-nowrap text-base">{{ $user->name }}</p>
+                <p class="overflow-clip text-ellipsis whitespace-nowrap text-base text-gray-500">
+                    {{ '@' . $user->username }}</p>
             </div>
         </div>
 
